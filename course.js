@@ -53,6 +53,12 @@ document.addEventListener("DOMContentLoaded", () => {
     menuToggle.textContent = navMenu.classList.contains("open") ? "X" : "☰";
   });
 
+  // Footer Dynamic Output Metrics
+  const currentYearEl = document.getElementById('currentYear');
+  if (currentYearEl) currentYearEl.textContent = new Date().getFullYear();
+  const lastModifiedEl = document.getElementById('lastModified');
+  if (lastModifiedEl) lastModifiedEl.textContent = document.lastModified;
+
   // Course Dynamic Component Display Loop
   const courseContainer = document.getElementById("course-container");
   const creditSummary = document.getElementById("credit-summary");

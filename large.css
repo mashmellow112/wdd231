@@ -1,0 +1,32 @@
+@media (min-width: 768px) {
+    #menu-toggle {
+      display: none;
+    }
+  
+    nav {
+      display: flex !important;
+      flex-direction: row;
+      background-color: #222;
+    }
+  
+    nav a {
+      border-bottom: none;
+      border-right: 1px solid #444;
+      padding: 12px 25px;
+    }
+  
+    .main-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+    }
+  
+    .wide-section {
+      grid-column: span 2;
+    }
+  
+    #course-container {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+  }

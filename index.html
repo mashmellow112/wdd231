@@ -3,38 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>immanuel.dev</title>
+    <title>WDD 231 - Web Frontend Development I - immanuel.dev</title>
+    <meta name="description" content="Course assignment home page for WDD 231, showcasing HTML, CSS, and JavaScript skills.">
+    <meta name="author" content="Samanya Immanuel">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="small.css">
+    <link rel="stylesheet" href="large.css">
     <script src="course.js" defer></script>
-    <script src="date.js" defer></script>
 </head>
 <body>
 
     <!-- Header Section -->
     <header>
-        <div class="header-container">
-            <div class="logo-area">
-                <!-- Wireframe logo box placeholder -->
-                <div class="logo-box">
-                    <svg width="30" height="30" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="3" fill="none"><path d="M10 10 H 30 M 20 10 V 30 M 10 30 H 30"></path></svg>
-                </div>
-                <span class="site-name">immanuel.dev</span>
-            </div>
-            <!-- Burger/Close Button for Mobile -->
-            <button class="menu-toggle" id="menu-toggle" aria-label="Toggle Navigation">☰</button>
+        <div class="logo-box">
+            <svg width="30" height="30" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="3" fill="none"><path d="M10 10 H 30 M 20 10 V 30 M 10 30 H 30"></path></svg>
         </div>
+        <span class="site-title">immanuel.dev</span>
+        <!-- Burger/Close Button for Mobile -->
+        <button class="menu-toggle" id="menu-toggle" aria-label="Toggle Navigation">☰</button>
     </header>
 
     <!-- Navigation -->
     <nav id="nav-menu">
-        <a href="#">Home</a>
+        <a href="#" class="active">Home</a>
         <a href="#">Chamber Project</a>
         <a href="#">Final Project</a>
+        <a href="#">About</a>
     </nav>
 
     <!-- Main Body Content Layout -->
     <main>
-        <h1>Home</h1>
+        <h1>WDD 231: Web Frontend Development I</h1>
 
         <!-- Top Section: About & Photo -->
         <div class="main-grid">
@@ -45,7 +46,7 @@
 
             <section class="card-section">
                 <h2>Student Photo</h2>
-                <img src="image/c4e838a333e152187c9e51f68912594e.jpg" alt="A photo of the student" class="student-photo">
+                <img src="image/c4e838a333e152187c9e51f68912594e.jpg" alt="A photo of the student, Immanuel" class="student-photo">
             </section>
 
             <section class="card-section wide-section">
