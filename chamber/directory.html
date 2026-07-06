@@ -3,8 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Samanya Immanuel">
     <title>Business Directory | Nansana Chamber of Commerce</title>
     <meta name="description" content="Explore local businesses and organizations belonging to the Nansana Chamber of Commerce. Support our local economic growth.">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Nansana Chamber of Commerce: Business Directory">
+    <meta property="og:description" content="Explore local businesses and organizations belonging to the Nansana Chamber of Commerce and support our local economic growth.">
+    <meta property="og:image" content="https://mashmellow112.github.io/wdd231/chamber/images/nansana-chamber-preview.jpg">
+    <meta property="og:url" content="https://mashmellow112.github.io/wdd231/chamber/directory.html">
+
+    <link rel="icon" href="images/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Open+Sans:wght@400;500&display=swap" rel="stylesheet">
@@ -23,7 +32,7 @@
                         <circle cx="20" cy="13" r="2" fill="currentColor"/>
                     </svg>
                 </div>
-                <h1>Nansana Chamber of Commerce</h1>
+                <p class="site-title">Nansana Chamber of Commerce</p>
             </div>
             
             <button id="theme-toggle" aria-label="Toggle Dark Mode">🌓</button>
@@ -44,7 +53,7 @@
 
     <main>
         <div class="title-bar">
-            <h2>Directory</h2>
+            <h1>Directory</h1>
             <div class="toggle-buttons">
                 <button id="grid-view" class="active-view">Grid</button>
                 <button id="list-view">List</button>
@@ -177,6 +186,6 @@
         </div>
     </footer>
 
-    <script src="scripts/directory.js"></script>
+    <script src="scripts/directory.js" defer></script>
 </body>
 </html>

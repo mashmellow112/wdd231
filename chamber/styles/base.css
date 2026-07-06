@@ -22,7 +22,7 @@ body {
     line-height: 1.6;
 }
 
-h1, h2, h3 {
+h1, h2, h3, .site-title {
     font-family: 'Montserrat', sans-serif;
     color: var(--primary-color);
 }
@@ -49,9 +49,10 @@ header {
     gap: 0.5rem;
 }
 
-.logo-area h1 {
+.site-title {
     font-size: 1.1rem;
     font-weight: 600;
+    color: var(--primary-color);
 }
 
 #menu-button {
