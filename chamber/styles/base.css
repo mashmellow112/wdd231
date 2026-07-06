@@ -118,19 +118,13 @@ nav a.active {
 #theme-toggle {
     background: transparent;
     border: none;
-    font-size: 1.2rem;
-    position: absolute;
-    right: 55px; /* Position it next to the hamburger */
-    top: 50%;
-    transform: translateY(-50%);
     cursor: pointer;
-    display: none; /* Hidden by default on mobile */
-    opacity: 0;
-    transition: opacity 0.4s ease;
+    font-size: 1.5rem;
+    /* This button is now always visible on mobile */
 }
 
-/* Show toggle when menu is open */
-#menu-button.open + #theme-toggle { display: block; opacity: 1; }
+/* The rule below is no longer needed as the button is always visible */
+/* #menu-button.open + #theme-toggle { display: block; opacity: 1; } */
 
 /* Layout Controller Block */
 .title-bar {
