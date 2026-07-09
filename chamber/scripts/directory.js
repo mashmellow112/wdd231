@@ -54,7 +54,9 @@ function displayMembers(members) {
             <h2>${member.name}</h2>
             <p class="tagline">${member.tagline}</p>
             <div class="card-content">
-                <div class="business-img-placeholder"><span></span></div>
+                <div class="business-img-placeholder">
+                    <img src="${member.image}" alt="Logo of ${member.name}" loading="lazy" width="120" height="120">
+                </div>
                 <div class="business-details">
                     <p><strong>EMAIL:</strong> ${member.email}</p>
                     <p><strong>PHONE:</strong> ${member.phone}</p>
