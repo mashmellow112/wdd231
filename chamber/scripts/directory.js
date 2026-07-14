@@ -3,9 +3,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const directoryContainer = document.getElementById("directory-container");
   const gridBtn = document.getElementById("grid-view-btn");
   const listBtn = document.getElementById("list-view-btn");
-  const menuBtn = document.getElementById("menu-button");
-  const primaryNav = document.getElementById("primary-nav");
-  const themeToggle = document.getElementById("theme-toggle");
 
   // --- Render Cards ---
   function displayMembers(data) {
@@ -61,11 +58,6 @@ document.addEventListener('DOMContentLoaded', () => {
     directoryContainer.classList.remove("grid-layout");
     listBtn.classList.add("active-toggle");
     gridBtn.classList.remove("active-toggle");
-  });
-
-  // --- Responsive Menu Toggle ---
-  menuBtn.addEventListener("click", () => {
-    primaryNav.classList.toggle("active");
   });
 
   // --- Dark/Light Theme Engine ---
