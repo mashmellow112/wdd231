@@ -71,15 +71,16 @@ header {
   align-items: center;
   gap: 0.75rem;
 }
-.logo-area h1 {
+.logo-area .site-title, .logo-area h1 {
   font-family: var(--font-headings);
   font-size: 1.25rem;
   color: var(--primary);
   display: flex;
   flex-direction: column;
+  font-weight: 700;
 }
 
-.logo-area h1 .sub-title {
+.logo-area .site-title .sub-title, .logo-area h1 .sub-title {
   font-size: 0.85rem;
   color: var(--text-color);
   font-weight: normal;

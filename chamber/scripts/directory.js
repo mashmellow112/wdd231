@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- Fetch Data ---
   async function getMembers() {
     try {
-      const response = await fetch('script/members.json');
+      const response = await fetch('scripts/members.json');
       if (response.ok) {
         const data = await response.json();
         displayMembers(data.members);
