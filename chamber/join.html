@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Join the Chamber of Commerce</title>
+  <meta name="description" content="Join the Chamber of Commerce and become part of a thriving business network.">
+  <link rel="stylesheet" href="styles/base.css">
+  <link rel="stylesheet" href="styles/large.css" media="(min-width: 1024px)">
+  <script defer src="script/main.js"></script>
+</head>
+<body>
+  <header>
+    <div class="logo-area">
+      <img src="images/image.jpg" alt="Chamber Logo" width="80" height="80">
+      <div>
+        <h1>Chamber of Commerce</h1>
+        <p>Empowering Local Commerce</p>
+      </div>
+    </div>
+    <nav>
+      <button id="menu-button" aria-label="Toggle Menu">☰</button>
+      <ul id="nav-menu">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="directory.html">Directory</a></li>
+        <li><a href="join.html" class="active">Join</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="home-grid">
+    <div class="card" style="grid-column: 1 / -1;">
+      <h2>Join Our Thriving Community</h2>
+      <p>Become a member to unlock benefits, network with local leaders, and grow your business.</p>
+      <form action="thankyou.html" method="get" class="join-form">
+        <fieldset>
+          <legend>Applicant Information</legend>
+          <label>First Name* <input type="text" name="fname" required></label>
+          <label>Last Name* <input type="text" name="lname" required></label>
+          <label>Email* <input type="email" name="email" placeholder="yourname@example.com" required></label>
+          <label>Mobile Phone* <input type="tel" name="phone" required></label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Business Information</legend>
+          <label>Business Name* <input type="text" name="bizname" required></label>
+          <label>Business Position <input type="text" name="position" pattern="[a-zA-Z\s-]{7,}" title="Position must be at least 7 characters long and contain only letters, spaces, or hyphens."></label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Membership Level</legend>
+          <label><input type="radio" name="level" value="np"> Non-Profit Membership</label>
+          <label><input type="radio" name="level" value="silver"> Silver Membership</label>
+          <label><input type="radio" name="level" value="gold"> Gold Membership</label>
+        </fieldset>
+
+        <fieldset>
+            <legend>Business Description</legend>
+            <textarea name="description" rows="5"></textarea>
+        </fieldset>
+
+        <input type="hidden" name="form_load_time" value="">
+        <button type="submit" class="cta-button">Join the Chamber</button>
+      </form>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-info">
+      <p>© <span id="currentyear"></span> Chamber of Commerce</p>
+      <p>Jinja, Uganda</p>
+      <p>info@chamber.org | +256 700 000000</p>
+    </div>
+    <p id="lastModified" class="highlight-text"></p>
+  </footer>
+  <script>
+    document.querySelector('input[name="form_load_time"]').value = Date.now();
+  </script>
+</body>
+</html>

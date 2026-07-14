@@ -1,0 +1,36 @@
+{
+  "members": [
+    {
+      "name": "Jinja Tech Innovators",
+      "address": "123 Main St, Jinja",
+      "phone": "+256 701 123456",
+      "website": "https://www.jinjatech.ug",
+      "logo": "images/jinjatech-logo.png",
+      "membershipLevel": "Gold"
+    },
+    {
+      "name": "Nile River Adventures",
+      "address": "456 River Rd, Jinja",
+      "phone": "+256 772 654321",
+      "website": "https://www.nileadventures.ug",
+      "logo": "images/nileadventures-logo.png",
+      "membershipLevel": "Silver"
+    },
+    {
+      "name": "Source Cafe",
+      "address": "789 Central Ave, Jinja",
+      "phone": "+256 755 987654",
+      "website": "https://www.sourcecafe.ug",
+      "logo": "images/sourcecafe-logo.png",
+      "membershipLevel": "Silver"
+    },
+    {
+      "name": "Uganda Crafts",
+      "address": "101 Market St, Jinja",
+      "phone": "+256 788 112233",
+      "website": "https://www.ugandacrafts.ug",
+      "logo": "images/ugandacrafts-logo.png",
+      "membershipLevel": "Bronze"
+    }
+  ]
+}

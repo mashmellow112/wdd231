@@ -3,12 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Member Directory | Chamber of Commerce</title>
-  <meta name="description" content="Explore local businesses and organizations in our member directory.">
+  <title>Contact Us | Chamber of Commerce</title>
+  <meta name="description" content="Get in touch with the Chamber of Commerce. We're here to help.">
   <link rel="stylesheet" href="styles/base.css">
   <link rel="stylesheet" href="styles/large.css" media="(min-width: 1024px)">
   <script defer src="script/main.js"></script>
-  <script defer src="script/directory.js"></script>
 </head>
 <body>
   <header>
@@ -23,24 +22,33 @@
       <button id="menu-button" aria-label="Toggle Menu">☰</button>
       <ul id="nav-menu">
         <li><a href="../index.html">Home</a></li>
-        <li><a href="directory.html" class="active">Directory</a></li>
+        <li><a href="directory.html">Directory</a></li>
         <li><a href="join.html">Join</a></li>
-        <li><a href="contact.html">Contact</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
       </ul>
     </nav>
   </header>
 
   <main class="home-grid">
-    <div class="title-bar">
-      <h2>Member Directory</h2>
-      <div class="toggle-buttons">
-        <button id="grid-view" class="active-view" aria-label="Grid View">⏹️ Grid</button>
-        <button id="list-view" aria-label="List View">📄 List</button>
+    <div class="card" style="grid-column: 1 / -1;">
+      <h2>Contact Us</h2>
+      <p>We'd love to hear from you! Reach out with any questions or comments.</p>
+      
+      <div class="contact-details">
+        <p><strong>Address:</strong> Jinja, Uganda</p>
+        <p><strong>Phone:</strong> +256 700 000000</p>
+        <p><strong>Email:</strong> info@chamber.org</p>
       </div>
-    </div>
 
-    <div id="directory-container" class="grid-layout">
-      <!-- Member cards will be loaded here by directory.js -->
+      <form action="#" method="get" class="contact-form">
+        <fieldset>
+          <legend>Send us a Message</legend>
+          <label>Your Name* <input type="text" name="name" required></label>
+          <label>Your Email* <input type="email" name="email" required></label>
+          <label>Message* <textarea name="message" rows="6" required></textarea></label>
+        </fieldset>
+        <button type="submit" class="cta-button">Send Message</button>
+      </form>
     </div>
   </main>
 

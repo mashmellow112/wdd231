@@ -1,0 +1,39 @@
+@media (min-width: 1024px) {
+  #menu-button {
+    display: none; /* Hide hamburger on large screens */
+  }
+
+  #nav-menu {
+    display: flex;
+    position: static;
+    flex-direction: row;
+    background: none;
+    border: none;
+    width: auto;
+  }
+  .home-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+  }
+
+  /* Span the Hero banner right across the first row */
+  .hero {
+    grid-column: 1 / span 2;
+  }
+
+  /* Side-by-side Spotlights under the main content blocks */
+  .spotlights-container {
+    grid-column: 1 / span 2;
+  }
+
+  .spotlight-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .weather-card, .events-card {
+    height: 100%;
+  }
+}

@@ -1,83 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WDD 231 - Web Frontend Development I - immanuel.dev</title>
-    <meta name="description" content="Course assignment home page for WDD 231, showcasing HTML, CSS, and JavaScript skills.">
-    <meta name="author" content="Samanya Immanuel">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles/small.css">
-    <link rel="stylesheet" href="styles/large.css">
-    <script src="scripts/course.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chamber of Commerce - Home</title>
+  <meta name="description" content="Welcome to the Chamber of Commerce home page. Connecting local businesses, driving community growth, and fostering collaboration.">
+  <link rel="stylesheet" href="chamber/styles/base.css">
+  <link rel="stylesheet" href="chamber/styles/large.css" media="(min-width: 1024px)">
+  <script defer src="chamber/script/main.js"></script>
+  <script defer src="chamber/script/weather.js"></script>
 </head>
 <body>
-
-    <!-- Header Section -->
-    <header>
-        <div class="logo-box">
-            <svg width="30" height="30" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="3" fill="none"><path d="M10 10 H 30 M 20 10 V 30 M 10 30 H 30"></path></svg>
-        </div>
-        <span class="site-title">immanuel.dev</span>
-        <!-- Burger/Close Button for Mobile -->
-        <button class="menu-toggle" id="menu-toggle" aria-label="Toggle Navigation">☰</button>
-    </header>
-
-    <!-- Navigation -->
-    <nav id="nav-menu">
-        <a href="#" class="active">Home</a>
-        <a href="#">Chamber Project</a>
-        <a href="#">Final Project</a>
-        <a href="#">About</a>
+  <header>
+    <div class="logo-area">
+      <img src="chamber/images/image.jpg" alt="Chamber Logo" width="80" height="80">
+      <div>
+        <h1>Chamber of Commerce</h1>
+        <p>Empowering Local Commerce</p>
+      </div>
+    </div>
+    <nav>
+      <button id="menu-button" aria-label="Toggle Menu">☰</button>
+      <ul id="nav-menu">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="chamber/directory.html">Directory</a></li>
+        <li><a href="chamber/join.html">Join</a></li>
+        <li><a href="chamber/contact.html">Contact</a></li>
+      </ul>
     </nav>
+  </header>
 
-    <!-- Main Body Content Layout -->
-    <main>
-        <h1>WDD 231: Web Frontend Development I</h1>
+  <main class="home-grid">
+    <!-- Hero Banner Section -->
+    <section class="hero">
+      <picture>
+        <source media="(min-width: 1024px)" srcset="chamber/images/plan2.jpg">
+        <source media="(min-width: 640px)" srcset="chamber/images/plan2.jpg">
+        <img src="chamber/images/plan2.jpg" alt="Chamber Business District District Hero" loading="eager">
+      </picture>
+      <div class="hero-cta">
+        <h2>Grow Your Business With Us</h2>
+        <p>Join a network of local professionals dedicated to communal growth.</p>
+        <a href="chamber/join.html" class="cta-button">Join the Chamber</a>
+      </div>
+    </section>
 
-        <!-- Top Section: About & Photo -->
-        <div class="main-grid">
-            <section class="card-section">
-                <h2>About Me</h2>
-                <p>Still waters run deep. I am a developer and digital creator dedicated to building high-fidelity, impactful digital experiences. By blending clean code with cinematic aesthetics, I design and develop platforms that solve real-world problems and seamless localized solutions. Silence is my signature; execution is my voice.</p>
-            </section>
+    <!-- Current Events -->
+    <section class="card events-card">
+      <h3>Upcoming Events</h3>
+      <div class="event-item">
+        <h4>Monthly Networking Mixer</h4>
+        <p>📅 July 23, 2026 | 6:00 PM</p>
+        <p>Connect with local entrepreneurs over drinks and appetizers.</p>
+      </div>
+      <div class="event-item">
+        <h4>Small Business Growth Seminar</h4>
+        <p>📅 August 10, 2026 | 10:00 AM</p>
+        <p>Learn local marketing strategies directly from industry experts.</p>
+      </div>
+    </section>
 
-            <section class="card-section">
-                <h2>Student Photo</h2>
-                <img src="images/photo.jpg" alt="A photo of the student, Immanuel" class="student-photo">
-            </section>
-
-            <section class="card-section wide-section">
-                <h2>Web Certificate Courses</h2>
-                <div class="filter-buttons">
-                  <button id="btn-all" class="filter-btn active">All</button>
-                  <button id="btn-cse" class="filter-btn">CSE</button>
-                  <button id="btn-wdd" class="filter-btn">WDD</button>
-                </div>
-                
-                <div id="course-container"></div>
-                
-                <p id="credit-summary"></p>
-            </section>
+    <!-- Weather Section -->
+    <section class="card weather-card">
+      <h3>Local Weather</h3>
+      <div id="current-weather">
+        <div class="weather-now">
+          <div id="weather-icon-container">
+            <svg xmlns="http://www.w3.org/2000/svg" width="64px" height="64px" viewBox="0 0 1024 1024" class="icon" version="1.1"><path d="M729.6 626.56S666.24 481.28 536.96 490.24c-1.28 0-152.96-4.48-179.84 189.44 0-1.28-161.28-15.36-172.16 106.24 1.28 0.64-12.8 156.8 190.72 143.36l445.44 0.768s179.84-75.264 106.88-220.16-198.4-83.328-198.4-83.328z" fill="#FFFFFF"></path><path d="M739.968 413.184c0 47.872-9.856 93.568-27.648 134.912-6.144 14.336-13.312 28.16-21.248 41.472-29.184-49.28-82.944-82.432-144.128-82.432-90.368 0-164.096 71.936-167.296 161.408-0.128 2.048-0.128 3.968-0.128 6.016v0.512c0 2.048 0 4.096 0.128 6.144 0.64 14.592-13.952 25.088-27.52 20.224-1.792-0.64-3.328-1.28-5.12-1.792h-0.256c-0.512-0.256-1.024-0.256-1.664-0.512s-1.28-0.256-1.792-0.512c-1.28-0.256-2.304-0.64-3.584-0.896-7.168-1.664-14.592-2.56-22.144-2.816-26.88-0.512-51.712 8.832-71.04 24.704-12.928-6.4-25.344-13.568-37.248-21.504C116.992 637.056 56.192 532.352 56.192 413.184c0-188.8 153.088-341.76 341.888-341.76 188.8 0 341.888 152.96 341.888 341.76z m0 0" fill="#FFBC00"></path><path d="M787.712 598.528c-15.488 0.128-30.464 2.176-44.672 5.888-13.184 3.456-25.856 8.448-37.632 14.848-0.256 0.128-0.256 0.384-0.256 0.64 0.256 0.768 0.512 1.664 0.768 2.432 0.256 0.512 0.256 1.024 0.512 1.536 0.256 0.768 0.512 1.792 0.768 2.56 4.864 16.128 22.016 25.344 38.144 19.968 0.64-0.256 1.28-0.384 1.792-0.64 1.024-0.256 2.048-0.64 2.944-0.896 1.024-0.256 1.92-0.64 2.944-0.768 9.216-2.432 18.816-3.968 28.672-4.48 81.664-3.968 149.12 65.152 142.976 146.688-4.864 63.744-53.504 115.328-115.712 124.672-6.656 1.024-13.568 1.536-20.48 1.536h-111.872c-0.512 0-0.768 0.64-0.256 0.896 29.44 24.064 66.688 38.784 107.264 39.936 1.664 0.128 3.328 0.128 4.864 0.128 6.912 0 13.696-0.384 20.48-1.152 88.576-10.24 157.44-85.888 157.056-177.28-0.384-97.536-80.64-176.896-178.304-176.512zM335.872 912.64h-20.48c-6.912 0-13.824-0.64-20.48-1.92-51.072-9.856-89.6-55.424-88.32-109.696 0.768-32.768 16.256-61.824 39.936-81.152 19.328-15.872 44.288-25.216 71.04-24.704 7.552 0.256 14.976 1.152 22.144 2.816 1.28 0.256 2.304 0.64 3.584 0.896 0.64 0.128 1.28 0.256 1.792 0.512 0.512 0.128 1.024 0.256 1.664 0.512h0.256c16.256 4.992 32.64-7.424 32.512-24.576v-0.512c0-2.048 0-4.096 0.128-6.016-12.544-6.016-26.112-10.24-40.192-12.544-7.808-1.28-15.744-1.92-23.936-1.92-41.344 0-78.976 16.896-106.112 44.16-26.88 27.136-43.648 64.384-43.648 105.6 0 75.52 56.32 138.368 129.28 148.224 5.248 0.768 10.496 1.152 15.744 1.28h0.256c1.408 0.128 2.944 0.128 4.352 0.128 1.536 0 3.072 0 4.608-0.128 37.888-1.152 72.448-16.512 98.176-40.832h-82.304z m0 0" fill="#6D6D6D"></path><path d="M743.04 604.416c-7.424-20.352-17.664-39.296-30.72-56.192-38.144-49.792-98.048-81.92-165.504-81.92-108.672 0-198.144 83.584-207.616 189.696-0.512 6.144-0.768 12.416-0.768 18.688 0 7.808 0.384 15.616 1.28 23.168 1.28 0.256 2.304 0.64 3.584 0.896 0.64 0.128 1.28 0.256 1.792 0.512 0.512 0.128 1.024 0.256 1.664 0.512h0.256c1.792 0.512 3.328 1.152 5.12 1.792 13.696 4.864 28.16-5.632 27.52-20.224-0.128-2.048-0.128-4.096-0.128-6.144v-0.512c0-2.048 0-4.096 0.128-6.016 3.2-89.472 77.056-161.408 167.296-161.408 61.312 0 114.944 33.024 144.128 82.432 5.504 9.472 10.24 19.328 13.952 29.824 0 0.128 0.128 0.256 0.128 0.384 0.256 0.768 0.512 1.664 0.768 2.432 0.256 0.512 0.256 1.024 0.512 1.536 0.128 0.256 0.256 0.512 0.256 0.768 5.376 17.024 23.424 26.752 40.448 21.248 1.024-0.256 2.048-0.64 2.944-0.896 1.024-0.256 1.92-0.64 2.944-0.768-2.048-13.824-5.376-27.136-9.984-39.808zM788.48 912.64c-6.912 0-13.824 1.024-20.48 0H335.872c-2.304 0.384-4.352 0.512-6.656 0.512-4.48 0-9.088-0.512-13.824-0.512-6.912 0-13.824-0.64-20.48-1.92l15.744 42.752h478.72l19.712-42.368c-6.784 1.024-13.568 1.536-20.608 1.536z m0 0" fill="#6D6D6D"></path></svg>
+          </div>
+          <div>
+            <span id="current-temp">--</span>°F
+            <p id="weather-desc">Loading weather...</p>
+          </div>
         </div>
-    </main>
+      </div>
+      <hr>
+      <h4>3-Day Forecast</h4>
+      <div id="forecast-container" class="forecast-grid">
+        <!-- Dynmically loaded via JS -->
+      </div>
+    </section>
 
-    <footer>
-        <div class="social-links">
-          <a href="https://linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-          </a>
-          <a href="https://github.com" target="_blank" rel="noopener" aria-label="GitHub">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-          </a>
-          <a href="https://x.com" target="_blank" rel="noopener" aria-label="X">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-          </a>
-        </div>
-        <p>&copy; <span id="currentYear"></span> Samanya Immanuel • Jinja, Kampala</p>
-        <p>Last Modification: <span id="lastModified"></span></p>
-    </footer>
+  </main>
+
+  <footer>
+    <div class="footer-info">
+      <p>© <span id="currentyear"></span> Chamber of Commerce</p>
+      <p>Jinja, Uganda</p>
+      <p>info@chamber.org | +256 700 000000</p>
+    </div>
+    <p id="lastModified" class="highlight-text"></p>
+  </footer>
 </body>
 </html>
