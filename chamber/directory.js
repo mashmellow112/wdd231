@@ -1,107 +1,88 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Toggle mobile hamburger menu
-    const menuButton = document.getElementById('menu-button');
-    const navMenu = document.getElementById('nav-menu');
+  // --- Select Elements ---
+  const directoryContainer = document.getElementById("directory-container");
+  const gridBtn = document.getElementById("grid-view-btn");
+  const listBtn = document.getElementById("list-view-btn");
+  const menuBtn = document.getElementById("menu-button");
+  const primaryNav = document.getElementById("primary-nav");
+  const themeToggle = document.getElementById("theme-toggle");
 
-    if (menuButton && navMenu) {
-        menuButton.addEventListener('click', () => {
-            navMenu.classList.toggle('open');
-            menuButton.classList.toggle('open');
-        });
+  // --- Render Cards ---
+  function displayMembers(data) {
+    directoryContainer.innerHTML = ""; // Clear loader text
+
+    data.forEach(member => {
+      const card = document.createElement("article");
+      card.classList.add("business-card");
+
+      card.innerHTML = `
+        <div class="card-header">
+          <h3>${member.name}</h3>
+          <p class="card-tagline">${member.tagline || member.membershipLevel + ' Member'}</p>
+        </div>
+        <div class="card-content">
+          <img src="${member.logo}" alt="${member.name} Logo" class="card-logo" loading="lazy" onerror="this.style.display='none'">
+          <div class="card-details">
+            <p><strong>PHONE:</strong> ${member.phone}</p>
+            <p><strong>URL:</strong> <a href="${member.website}" target="_blank">${member.website.replace("https://", "")}</a></p>
+          </div>
+        </div>
+      `;
+      directoryContainer.appendChild(card);
+    });
+  }
+
+  // --- Fetch Data ---
+  async function getMembers() {
+    try {
+      const response = await fetch('scripts/members.json');
+      if (response.ok) {
+        const data = await response.json();
+        displayMembers(data.members);
+      } else {
+        throw new Error('Failed to fetch member data.');
+      }
+    } catch (error) {
+      console.error(error);
+      directoryContainer.innerHTML = `<p>Error loading directory. Please try again later.</p>`;
     }
+  }
 
-    // Grid/List toggle handlers
-    const gridViewBtn = document.getElementById('grid-view');
-    const listViewBtn = document.getElementById('list-view');
-    const directoryContainer = document.getElementById('directory-container');
+  // --- Toggle Layout Views ---
+  gridBtn.addEventListener("click", () => {
+    directoryContainer.classList.add("grid-layout");
+    directoryContainer.classList.remove("list-layout");
+    gridBtn.classList.add("active-toggle");
+    listBtn.classList.remove("active-toggle");
+  });
 
-    if (gridViewBtn && listViewBtn && directoryContainer) {
-        gridViewBtn.addEventListener('click', () => {
-            directoryContainer.className = 'grid-layout';
-            gridViewBtn.classList.add('active-view');
-            listViewBtn.classList.remove('active-view');
-        });
+  listBtn.addEventListener("click", () => {
+    directoryContainer.classList.add("list-layout");
+    directoryContainer.classList.remove("grid-layout");
+    listBtn.classList.add("active-toggle");
+    gridBtn.classList.remove("active-toggle");
+  });
 
-        listViewBtn.addEventListener('click', () => {
-            directoryContainer.className = 'list-layout';
-            listViewBtn.classList.add('active-view');
-            gridViewBtn.classList.remove('active-view');
-        });
-    }
+  // --- Responsive Menu Toggle ---
+  menuBtn.addEventListener("click", () => {
+    primaryNav.classList.toggle("active");
+  });
 
-    // Set Last Modified dynamic text
-    const lastModifiedEl = document.getElementById('last-modified');
-    if (lastModifiedEl) {
-        lastModifiedEl.textContent = "Last Modification: " + document.lastModified;
-    }
+  // --- Dark/Light Theme Engine ---
+  const savedTheme = localStorage.getItem("theme") || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+  document.documentElement.setAttribute("data-theme", savedTheme);
 
-    // Set dynamic copyright year
-    const copyrightYearEl = document.querySelector('.copyright-year');
-    if (copyrightYearEl) {
-        copyrightYearEl.textContent = new Date().getFullYear();
-    }
+  themeToggle.addEventListener("click", () => {
+    const currentTheme = document.documentElement.getAttribute("data-theme");
+    const targetTheme = currentTheme === "dark" ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", targetTheme);
+    localStorage.setItem("theme", targetTheme);
+  });
 
+  // --- Info Footer Setup ---
+  document.getElementById("current-year").textContent = new Date().getFullYear();
+  document.getElementById("last-modified").textContent = document.lastModified;
 
-    // Fetch and display member data
-    const membersUrl = 'data/members.json';
-
-    async function getMembers() {
-        try {
-            const response = await fetch(membersUrl);
-            if (response.ok) {
-                const data = await response.json();
-                displayMembers(data);
-            } else {
-                // Log the full response status and text for better debugging
-                console.error(`Failed to fetch members.json: ${response.status} - ${response.statusText}`);
-                throw new Error(`Failed to fetch members.json: ${response.status} - ${await response.text()}`);
-            }
-        } catch (error) {
-            console.error('Error fetching or parsing members data:', error);
-        }
-    }
-
-    function displayMembers(members) {
-        if (!directoryContainer) {
-            console.error('directoryContainer not found. Cannot display members.');
-            return;
-        }
-        directoryContainer.innerHTML = ''; // Clear existing static content
-
-        const membershipLevels = {
-            1: 'Member',
-            2: 'Silver',
-            3: 'Gold'
-        };
-
-        members.forEach(member => {
-            const card = document.createElement('section');
-            card.className = 'business-card';
-
-            const levelName = membershipLevels[member.membership_level] || 'Member';
-
-            card.innerHTML = `
-                <div class="membership-level" data-level="${member.membership_level}">
-                    ${levelName}
-                </div>
-                <h2>${member.name}</h2>
-                <p class="tagline">${member.tagline}</p>
-                <div class="card-content">
-                    <div class="business-img-placeholder">
-                        <img src="${member.image}" alt="Logo of ${member.name}" loading="lazy" width="120" height="120">
-                    </div>
-                    <div class="business-details">
-                        <p><strong>EMAIL:</strong> ${member.email}</p>
-                        <p><strong>PHONE:</strong> ${member.phone}</p>
-                        <p><strong>URL:</strong> <a href="${member.url}" target="_blank">${member.url.replace('https://', '')}</a></p>
-                    </div>
-                </div>`;
-            directoryContainer.appendChild(card);
-        });
-    }
-
-    // Only call getMembers if directoryContainer exists, as it's the target for content
-    if (directoryContainer) {
-        getMembers();
-    }
+  // Init render
+  getMembers();
 });
