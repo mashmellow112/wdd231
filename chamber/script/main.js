@@ -2,19 +2,11 @@ document.addEventListener("DOMContentLoaded", () => {
   // Navigation Toggle Mechanism
   const menuButton = document.getElementById("menu-button");
   const navMenu = document.getElementById("nav-menu");
+  const primaryNav = document.getElementById("primary-nav");
 
-  if (menuButton && navMenu) {
+  if (menuButton && (navMenu || primaryNav)) {
     menuButton.addEventListener("click", () => {
-      navMenu.classList.toggle("open");
-      // Optional: Change button text/icon
-      menuButton.textContent = navMenu.classList.contains("open") ? "✕" : "☰";
+      (navMenu || primaryNav).classList.toggle("active");
     });
   }
-
-  // Footer Dynamic Output Metrics
-  const currentYearEl = document.getElementById('currentyear');
-  if (currentYearEl) currentYearEl.textContent = new Date().getFullYear();
-  
-  const lastModifiedEl = document.getElementById('lastModified');
-  if (lastModifiedEl) lastModifiedEl.textContent = `Last Modified: ${document.lastModified}`;
 });

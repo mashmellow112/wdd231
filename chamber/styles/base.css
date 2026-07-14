@@ -1,315 +1,362 @@
-/* Custom properties for a modern dark-mode aesthetic */
+/* --- Root Custom Variables --- */
 :root {
-  --bg-primary: #121214;
-  --bg-surface: rgba(25, 25, 28, 0.7);
-  --border-color: rgba(255, 255, 255, 0.08);
-  --accent-color: #3b82f6; /* Electric Blue */
-  --accent-hover: #2563eb;
-  --text-main: #f3f4f6;
-  --text-muted: #9ca3af;
-  --gold: #f59e0b;
-  --silver: #94a3b8;
+  --primary: #0F4C5C;        /* Deep Teal */
+  --secondary: #E36414;      /* Warm Amber */
+  --bg-color: #F8F9FA;       /* Light Gray/Off-White */
+  --card-bg: #FFFFFF;        /* Bright White for Cards */
+  --text-color: #1D2D44;     /* Dark Slate */
+  --border-color: #D1D5DB;   /* Soft borders */
+  --font-headings: 'Montserrat', sans-serif;
+  --font-body: 'Open Sans', sans-serif;
+  --transition-speed: 0.3s;
 }
 
-body {
-  background-color: var(--bg-primary);
-  color: var(--text-main);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+/* --- Dark Mode Variables overrides --- */
+[data-theme="dark"] {
+  --primary: #52B788;        /* Softened green accent for contrast */
+  --secondary: #F77F00;      /* Clearer amber */
+  --bg-color: #121212;       /* Dark background */
+  --card-bg: #1E1E1E;        /* Dark gray cards */
+  --text-color: #E0E0E0;     /* Soft White text */
+  --border-color: #333333;
+}
+
+/* --- Base Resets --- */
+* {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-/* Header & Navigation */
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem;
-  background-color: var(--bg-primary);
-  border-bottom: 1px solid var(--border-color);
-  position: relative; /* Establish a stacking context */
-  z-index: 10; /* Ensure header is above other content */
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color var(--transition-speed), color var(--transition-speed);
+  line-height: 1.6;
 }
 
+/* --- Header Layout --- */
+header {
+  background-color: var(--card-bg);
+  border-bottom: 2px solid var(--border-color);
+  padding: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+}
 .logo-area {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.75rem;
 }
-
 .logo-area h1 {
+  font-family: var(--font-headings);
   font-size: 1.25rem;
-  margin: 0;
-}
-
-.logo-area p {
-  margin: 0;
-  font-size: 0.8rem;
-  color: var(--text-muted);
-}
-
-#menu-button {
-  background: none;
-  border: none;
-  color: var(--text-main);
-  font-size: 2rem;
-  cursor: pointer;
-}
-
-nav { position: relative; }
-
-#nav-menu {
-  display: none; /* Hidden by default on mobile */
+  color: var(--primary);
+  display: flex;
   flex-direction: column;
-  position: absolute;
-  top: 100%;
-  right: 0;
-  background-color: var(--bg-surface);
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  padding: 1rem;
-  list-style: none;
-  gap: 1rem;
-  width: 200px;
 }
 
-#nav-menu.open {
-  display: flex; /* Show when 'open' class is added */
+.logo-area h1 .sub-title {
+  font-size: 0.85rem;
+  color: var(--text-color);
+  font-weight: normal;
 }
 
-#nav-menu a {
-  color: var(--text-main);
-  text-decoration: none;
+.nav-controls {
+  display: flex;
+  gap: 0.5rem;
 }
 
-#nav-menu a.active {
-  color: var(--accent-color);
-  font-weight: bold;
+.icon-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--text-color);
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Card Styling with a subtle "glass" effect */
-.card {
-  background: var(--bg-surface);
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
-  padding: 1.5rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-  backdrop-filter: blur(10px);
-}
-
-/* Hero Section */
-.hero {
-  position: relative;
-  border-radius: 12px;
-  overflow: hidden;
-  margin-bottom: 1.5rem;
-  border: 1px solid var(--border-color);
-}
-
-.hero img {
+/* --- Navigation Menu --- */
+nav {
   width: 100%;
-  height: auto;
-  min-height: 250px;
-  object-fit: cover;
+  display: none; /* Mobile first hidden state */
+  margin-top: 1rem;
+}
+
+nav.active {
   display: block;
 }
 
-.hero-cta {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 1.5rem;
-  background: linear-gradient(transparent, rgba(0, 0, 0, 0.85));
-  text-align: center;
-}
-
-.cta-button {
-  display: inline-block;
-  background-color: var(--accent-color);
-  color: white;
-  padding: 0.75rem 1.5rem;
-  border-radius: 30px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: background 0.2s ease;
-}
-
-.cta-button:hover {
-  background-color: var(--accent-hover);
-}
-
-/* Grid layout default for mobile (stacked) */
-.home-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  max-width: 1200px;
-  margin: 1.5rem auto;
-  padding: 0 1rem;
-}
-
-/* Spotlight layout defaults */
-.spotlight-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.spotlight-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-
-.spotlight-logo {
-  max-height: 60px;
-  width: auto;
-  margin: 1rem 0;
-  filter: grayscale(20%) brightness(95%);
-}
-
-.badge {
-  display: inline-block;
-  padding: 0.25rem 0.6rem;
-  font-size: 0.75rem;
-  font-weight: bold;
-  border-radius: 20px;
-}
-.badge-gold { background-color: rgba(245, 158, 11, 0.2); color: var(--gold); border: 1px solid var(--gold); }
-.badge-silver { background-color: rgba(148, 163, 184, 0.2); color: var(--silver); border: 1px solid var(--silver); }
-
-/* Footer Styling */
-footer {
-  background-color: var(--bg-primary);
-  border-top: 1px solid var(--border-color);
-  padding: 2rem 1rem;
-  text-align: center;
-  margin-top: 2rem;
-  color: var(--text-muted);
-}
-
-.footer-info p {
-  margin: 0.5rem 0;
-}
-
-.highlight-text { color: var(--accent-color); }
-
-/* Form Styling */
-.join-form, .contact-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  margin-top: 2rem;
-}
-
-.join-form fieldset, .contact-form fieldset {
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.join-form legend, .contact-form legend {
-  font-weight: bold;
-  padding: 0 0.5rem;
-  color: var(--text-main);
-}
-
-.join-form label, .contact-form label {
+nav ul {
+  list-style: none;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  color: var(--text-muted);
 }
 
-.join-form input[type="text"],
-.join-form input[type="email"],
-.join-form input[type="tel"],
-.join-form textarea,
-.contact-form input[type="text"],
-.contact-form input[type="email"],
-.contact-form textarea {
-  background-color: var(--bg-primary);
-  border: 1px solid var(--border-color);
-  border-radius: 6px;
+nav a {
+  display: block;
   padding: 0.75rem;
-  color: var(--text-main);
-  font-size: 1rem;
+  color: var(--text-color);
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 4px;
+  transition: background-color var(--transition-speed);
 }
 
-.join-form input:focus,
-.join-form textarea:focus,
-.contact-form input:focus,
-.contact-form textarea:focus {
-  outline: 2px solid var(--accent-color);
-  border-color: var(--accent-color);
+nav a:hover, nav a.active {
+  background-color: var(--primary);
+  color: #FFFFFF;
 }
 
-/* Directory Page Styles */
-.title-bar {
-  grid-column: 1 / -1;
+/* --- Main Structure & Toggle buttons --- */
+main {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+ .directory-section h2 {
+  font-family: var(--font-headings);
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  border-left: 5px solid var(--secondary);
+  padding-left: 0.75rem;
+}
+
+.view-toggle {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem;
-  background: var(--bg-surface);
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
 }
 
-.toggle-buttons button {
-  background: transparent;
-  border: 1px solid var(--border-color);
-  color: var(--text-muted);
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
+.view-toggle button {
+  padding: 0.5rem 1.5rem;
+  font-size: 1rem;
+  font-family: var(--font-headings);
   cursor: pointer;
-  transition: all 0.2s ease;
+  border: 1px solid var(--border-color);
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  border-radius: 4px;
+  transition: background var(--transition-speed);
 }
 
-.toggle-buttons button.active-view {
-  background-color: var(--accent-color);
-  color: white;
-  border-color: var(--accent-color);
+.view-toggle button.active-toggle {
+  background-color: var(--primary);
+  color: #FFFFFF;
+  border-color: var(--primary);
 }
 
+/* --- Grid & List Structural Switching --- */
 #directory-container {
-  grid-column: 1 / -1;
-}
-
-.grid-layout {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1.5rem;
+  transition: all var(--transition-speed) ease-in-out;
 }
 
+/* Grid layout (from wireframe layout design) */
+.grid-layout {
+  grid-template-columns: 1fr;
+}
+
+/* List layout (Single column layout style) */
 .list-layout {
+  grid-template-columns: 1fr !important;
+}
+
+/* --- Dynamic Business Cards --- */
+.business-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.business-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 12px rgba(0,0,0,0.1);
+}
+
+.card-header {
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.75rem;
+}
+
+.card-header h3 {
+  font-family: var(--font-headings);
+  font-size: 1.25rem;
+}
+
+.card-tagline {
+  font-style: italic;
+  font-size: 0.85rem;
+  color: var(--secondary);
+}
+
+.card-content {
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
-.list-layout .business-card {
-  display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
-  align-items: center;
-  text-align: left;
+.card-logo {
+  max-width: 100px;
+  height: auto;
+  display: block;
+  background-color: #E0E0E0;
+  border-radius: 4px;
+  object-fit: cover;
+  align-self: flex-start;
 }
 
-.business-card {
+/* Fallback mock graphic cross-hatch styling matching wireframe image fallback */
+.img-placeholder {
+  width: 100px;
+  height: 100px;
+  background: #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.card-details {
+  font-size: 0.9rem;
+}
+
+.card-details p {
+  margin-bottom: 0.35rem;
+}
+
+.card-details strong {
+  color: var(--primary);
+}
+
+/* --- CSS Adjustments for List Layout view style --- */
+.list-layout .business-card {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+}
+
+.list-layout .card-header {
+  border: none;
+  padding: 0;
+}
+
+.list-layout .card-content {
+  flex-direction: row;
+  align-items: center;
+  gap: 2rem;
+}
+
+.list-layout .card-logo {
+  display: none; /* Clean presentation in list form */
+}
+
+/* --- Responsive Layouts (Desktop view shifts) --- */
+@media (min-width: 768px) {
+  nav {
+    display: block;
+    width: auto;
+    margin-top: 0;
+  }
+  
+  #menu-button {
+    display: none;
+  }
+
+  nav ul {
+    flex-direction: row;
+    gap: 1.5rem;
+  }
+
+  .grid-layout {
+    grid-template-columns: repeat(3, 1fr); /* Matching the Desktop 3x3 layout */
+  }
+}
+
+/* --- Footer Area Styles --- */
+footer {
+  background-color: var(--card-bg);
+  border-top: 2px solid var(--border-color);
+  padding: 2rem 1rem;
+  margin-top: 4rem;
+}
+
+.footer-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-info h3 {
+  margin-bottom: 0.5rem;
+  color: var(--primary);
+}
+
+.social-icons {
+  display: flex;
+  gap: 1rem;
+}
+
+.social-icons a {
+  color: var(--text-color);
+  transition: color var(--transition-speed);
+}
+
+.social-icons a:hover {
+  color: var(--secondary);
+}
+
+.footer-divider {
+  border: 0;
+  border-top: 1px solid var(--border-color);
+  margin: 1.5rem 0;
+}
+
+.footer-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
   text-align: center;
 }
 
-.business-card img {
-  max-height: 80px;
-  width: auto;
-  margin: 1rem auto;
-}
-
-.business-card a {
-  color: var(--accent-color);
+@media (min-width: 768px) {
+  .footer-top {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+  }
+  .footer-bottom {
+    flex-direction: row;
+    justify-content: space-between;
+  }
 }
