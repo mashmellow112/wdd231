@@ -1,30 +1,33 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // --- Select Elements ---
   const directoryContainer = document.getElementById("directory-container");
   const gridBtn = document.getElementById("grid-view-btn");
   const listBtn = document.getElementById("list-view-btn");
-  const menuBtn = document.getElementById("menu-button");
-  const primaryNav = document.getElementById("primary-nav");
-  const themeToggle = document.getElementById("theme-toggle");
 
-  // --- Render Cards ---
   function displayMembers(data) {
-    directoryContainer.innerHTML = ""; // Clear loader text
+    directoryContainer.innerHTML = "";
+
+    if (!data || data.length === 0) {
+      directoryContainer.innerHTML = `<p class="loading-text">No members found.</p>`;
+      return;
+    }
 
     data.forEach(member => {
       const card = document.createElement("article");
       card.classList.add("business-card");
 
+      const badgeClass = member.membershipLevel === 'Gold' ? 'membership-gold' : 'membership-silver';
+
       card.innerHTML = `
         <div class="card-header">
           <h3>${member.name}</h3>
-          <p class="card-tagline">${member.tagline || member.membershipLevel + ' Member'}</p>
+          <span class="membership-badge ${badgeClass}">${member.membershipLevel} Member</span>
         </div>
         <div class="card-content">
           <img src="${member.logo}" alt="${member.name} Logo" class="card-logo" loading="lazy" onerror="this.style.display='none'">
           <div class="card-details">
+            <p><strong>ADDRESS:</strong> ${member.address}</p>
             <p><strong>PHONE:</strong> ${member.phone}</p>
-            <p><strong>URL:</strong> <a href="${member.website}" target="_blank">${member.website.replace("https://", "")}</a></p>
+            <p><strong>URL:</strong> <a href="${member.website}" target="_blank" rel="noopener noreferrer">${member.website.replace("https://", "")}</a></p>
           </div>
         </div>
       `;
@@ -32,10 +35,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- Fetch Data ---
   async function getMembers() {
     try {
-      const response = await fetch('scripts/members.json');
+      const response = await fetch('./members.json');
       if (response.ok) {
         const data = await response.json();
         displayMembers(data.members);
@@ -44,11 +46,10 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     } catch (error) {
       console.error(error);
-      directoryContainer.innerHTML = `<p>Error loading directory. Please try again later.</p>`;
+      directoryContainer.innerHTML = `<p class="loading-text">Error loading directory. Please try again later.</p>`;
     }
   }
 
-  // --- Toggle Layout Views ---
   gridBtn.addEventListener("click", () => {
     directoryContainer.classList.add("grid-layout");
     directoryContainer.classList.remove("list-layout");
@@ -63,26 +64,8 @@ document.addEventListener('DOMContentLoaded', () => {
     gridBtn.classList.remove("active-toggle");
   });
 
-  // --- Responsive Menu Toggle ---
-  menuBtn.addEventListener("click", () => {
-    primaryNav.classList.toggle("active");
-  });
-
-  // --- Dark/Light Theme Engine ---
-  const savedTheme = localStorage.getItem("theme") || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-  document.documentElement.setAttribute("data-theme", savedTheme);
-
-  themeToggle.addEventListener("click", () => {
-    const currentTheme = document.documentElement.getAttribute("data-theme");
-    const targetTheme = currentTheme === "dark" ? "light" : "dark";
-    document.documentElement.setAttribute("data-theme", targetTheme);
-    localStorage.setItem("theme", targetTheme);
-  });
-
-  // --- Info Footer Setup ---
   document.getElementById("current-year").textContent = new Date().getFullYear();
   document.getElementById("last-modified").textContent = document.lastModified;
 
-  // Init render
   getMembers();
 });

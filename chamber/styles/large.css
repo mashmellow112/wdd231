@@ -1,39 +1,47 @@
 @media (min-width: 1024px) {
   #menu-button {
-    display: none; /* Hide hamburger on large screens */
+    display: none;
   }
 
-  #nav-menu {
-    display: flex;
-    position: static;
-    flex-direction: row;
-    background: none;
-    border: none;
-    width: auto;
-  }
-  .home-grid {
+  main.home-grid {
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: 2rem;
   }
 
-  /* Span the Hero banner right across the first row */
-  .hero {
+  main.home-grid .hero {
     grid-column: 1 / span 2;
   }
 
-  /* Side-by-side Spotlights under the main content blocks */
-  .spotlights-container {
+  main.home-grid .spotlights-container {
     grid-column: 1 / span 2;
   }
 
   .spotlight-grid {
-    display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
   }
 
-  .weather-card, .events-card {
+  main.home-grid .weather-card,
+  main.home-grid .events-card {
     height: 100%;
+  }
+
+  .membership-tiers {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .join-form-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .join-form .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .discover-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }

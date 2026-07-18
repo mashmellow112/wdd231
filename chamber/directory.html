@@ -7,8 +7,6 @@
   <meta name="description" content="Explore local businesses and members of the Nansana Chamber of Commerce. Support local and find trusted community partners.">
   <meta name="author" content="Your Name">
   <link rel="icon" href="images/image.jpg">
-
-  <!-- Open Graph Meta Tags -->
   <meta property="og:title" content="Member Directory | Nansana Chamber of Commerce">
   <meta property="og:type" content="website">
   <meta property="og:description" content="Find and connect with local businesses in the Nansana Chamber of Commerce directory. Support our community by supporting local partners.">
@@ -16,16 +14,16 @@
   <meta property="og:url" content="https://your-username.github.io/wdd231/chamber/directory.html">
   <link rel="stylesheet" href="styles/base.css">
   <link rel="stylesheet" href="styles/large.css" media="(min-width: 1024px)">
-  <!-- Google Fonts: Montserrat for Headings, Open Sans for Body -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
   <script defer src="scripts/main.js"></script>
   <script defer src="scripts/directory.js"></script>
+  <script defer src="scripts/theme.js"></script>
 </head>
 <body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
 
-  <!-- HEADER -->
   <header>
     <div class="header-container">
       <div class="logo-area">
@@ -34,45 +32,34 @@
           Nansana Chamber <span class="sub-title">of Commerce</span>
         </div>
       </div>
-      
-      <!-- Nav & Theme Controls -->
       <div class="nav-controls">
         <button id="theme-toggle" aria-label="Toggle dark/light theme" class="icon-btn">
-          <!-- SVG representational split circle icon from wireframe -->
-          <svg viewBox="0 0 24 24" width="24" height="24">
-            <path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2zm0 18V4a8 8 0 0 1 0 16z" fill="currentColor"/>
-          </svg>
+          <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2zm0 18V4a8 8 0 0 1 0 16z" fill="currentColor"/></svg>
         </button>
-        <button id="menu-button" aria-label="Toggle navigation menu" class="icon-btn">
-          ☰
+        <button id="menu-button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="primary-nav" class="icon-btn">
+          <span class="hamburger-icon" aria-hidden="true">☰</span>
         </button>
       </div>
-
-      <nav id="primary-nav">
+      <nav id="primary-nav" aria-label="Primary">
         <ul>
           <li><a href="index.html">Home</a></li>
-          <li><a href="directory.html" class="active">Directory</a></li>
+          <li><a href="directory.html" class="active" aria-current="page">Directory</a></li>
           <li><a href="join.html">Join</a></li>
           <li><a href="discover.html">Discover</a></li>
+          <li><a href="contact.html">Contact</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <!-- MAIN MAIN CONTAINER -->
-  <main>
+  <main id="main-content">
     <section class="directory-section">
-      <h1>Directory</h1>
-      
-      <!-- Grid / List Switchers -->
+      <h1>Member Directory</h1>
       <div class="view-toggle">
         <button id="grid-view-btn" class="active-toggle" aria-label="Grid View">Grid</button>
         <button id="list-view-btn" aria-label="List View">List</button>
       </div>
-
-      <!-- Target Container for JS Card Insertion -->
       <div id="directory-container" class="grid-layout">
-        <!-- Rendered dynamically by javascript, fallback placeholders: -->
         <div class="card-loading">Loading local business directory...</div>
       </div>
     </section>

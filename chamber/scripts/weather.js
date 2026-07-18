@@ -1,81 +1,88 @@
-// OpenWeatherMap Configuration
-const apiKey = 'YOUR_API_KEY'; 
-const lat = '0.4479'; 
-const lon = '33.2032'; 
-const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`;
-const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`;
+const lat = 0.3476;
+const lon = 32.5825;
+const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&daily=weathercode,temperature_2m_max,temperature_2m_min&timezone=auto`;
 
-// Fetch and render current weather
-async function fetchCurrentWeather() {
+const wmoCodes = {
+  0: { desc: 'Clear sky', icon: '☀️' },
+  1: { desc: 'Mainly clear', icon: '🌤️' },
+  2: { desc: 'Partly cloudy', icon: '⛅' },
+  3: { desc: 'Overcast', icon: '☁️' },
+  45: { desc: 'Fog', icon: '🌫️' },
+  48: { desc: 'Depositing rime fog', icon: '🌫️' },
+  51: { desc: 'Light drizzle', icon: '🌦️' },
+  53: { desc: 'Moderate drizzle', icon: '🌦️' },
+  55: { desc: 'Dense drizzle', icon: '🌧️' },
+  61: { desc: 'Slight rain', icon: '🌧️' },
+  63: { desc: 'Moderate rain', icon: '🌧️' },
+  65: { desc: 'Heavy rain', icon: '🌧️' },
+  71: { desc: 'Slight snow', icon: '🌨️' },
+  73: { desc: 'Moderate snow', icon: '🌨️' },
+  75: { desc: 'Heavy snow', icon: '❄️' },
+  80: { desc: 'Slight rain showers', icon: '🌦️' },
+  81: { desc: 'Moderate rain showers', icon: '🌧️' },
+  82: { desc: 'Violent rain showers', icon: '⛈️' },
+  95: { desc: 'Thunderstorm', icon: '⛈️' },
+  96: { desc: 'Thunderstorm with hail', icon: '⛈️' },
+  99: { desc: 'Thunderstorm with heavy hail', icon: '⛈️' }
+};
+
+function getWeatherInfo(code) {
+  return wmoCodes[code] || { desc: 'Unknown', icon: '❓' };
+}
+
+async function fetchWeather() {
   try {
     const response = await fetch(weatherUrl);
-    if (response.ok) {
-      const data = await response.json();
-      displayCurrentWeather(data);
-    } else {
-      throw Error(await response.text());
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`);
     }
+    const data = await response.json();
+    displayCurrentWeather(data.current_weather);
+    displayForecast(data.daily);
   } catch (error) {
-    console.error("Weather data fetch failed:", error);
+    console.error('Weather fetch failed:', error);
+    document.getElementById('current-temp').textContent = '--';
+    document.getElementById('weather-desc').textContent = 'Weather unavailable';
+    document.getElementById('forecast-container').innerHTML = '<p class="loading-text">Forecast unavailable</p>';
   }
 }
 
-function displayCurrentWeather(data) {
-  const currentTemp = document.querySelector('#current-temp');
-  const weatherIcon = document.querySelector('#weather-icon');
-  const weatherDesc = document.querySelector('#weather-desc');
+function displayCurrentWeather(current) {
+  const tempEl = document.getElementById('current-temp');
+  const descEl = document.getElementById('weather-desc');
+  const iconEl = document.getElementById('weather-icon');
 
-  currentTemp.innerHTML = `${Math.round(data.main.temp)}`;
-  const iconCode = data.weather[0].icon;
-  weatherIcon.setAttribute('src', `https://openweathermap.org/img/wn/${iconCode}@2x.png`);
-  weatherIcon.setAttribute('alt', data.weather[0].description);
-  
-  // Title-case description
-  const words = data.weather[0].description.split(" ");
-  weatherDesc.textContent = words.map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
+  tempEl.textContent = Math.round(current.temperature);
+  const info = getWeatherInfo(current.weathercode);
+  descEl.textContent = info.desc;
+  iconEl.setAttribute('alt', info.desc);
+  iconEl.textContent = info.icon;
+  iconEl.style.fontSize = '64px';
+  iconEl.style.lineHeight = '1';
 }
 
-// Fetch and render 3-day forecast
-async function fetchForecast() {
-  try {
-    const response = await fetch(forecastUrl);
-    if (response.ok) {
-      const data = await response.json();
-      displayForecast(data);
-    }
-  } catch (error) {
-    console.error("Forecast data fetch failed:", error);
-  }
-}
+function displayForecast(daily) {
+  const container = document.getElementById('forecast-container');
+  container.innerHTML = '';
 
-function displayForecast(data) {
-  const forecastContainer = document.querySelector('#forecast-container');
-  forecastContainer.innerHTML = '';
+  const today = new Date(daily.time[0]).toDateString();
 
-  // OpenWeather Map /forecast returns 40 data points (every 3 hours for 5 days).
-  // We filter to grab one point per day (e.g., at 12:00:00 PM).
-  const dailyForecasts = data.list.filter(item => item.dt_txt.includes('12:00:00'));
-
-  // Slice down to exactly 3 days
-  const threeDayForecast = dailyForecasts.slice(0, 3);
-
-  threeDayForecast.forEach(day => {
-    const date = new Date(day.dt * 1000);
+  for (let i = 1; i <= 3 && i < daily.time.length; i++) {
+    const date = new Date(daily.time[i]);
     const dayName = date.toLocaleDateString('en-US', { weekday: 'short' });
-    const temp = Math.round(day.main.temp);
-    const iconCode = day.weather[0].icon;
+    const maxTemp = Math.round(daily.temperature_2m_max[i]);
+    const minTemp = Math.round(daily.temperature_2m_min[i]);
+    const info = getWeatherInfo(daily.weathercode[i]);
 
-    const forecastDay = document.createElement('div');
-    forecastDay.className = 'forecast-day';
-    forecastDay.innerHTML = `
+    const dayEl = document.createElement('div');
+    dayEl.className = 'forecast-day';
+    dayEl.innerHTML = `
       <span class="day-label">${dayName}</span>
-      <img src="https://openweathermap.org/img/wn/${iconCode}.png" alt="${day.weather[0].description}">
-      <span class="day-temp">${temp}°F</span>
+      <span class="day-icon" aria-hidden="true" style="font-size: 2rem; line-height: 1;">${info.icon}</span>
+      <span class="day-temp">${maxTemp}° / ${minTemp}°</span>
     `;
-    forecastContainer.appendChild(forecastDay);
-  });
+    container.appendChild(dayEl);
+  }
 }
 
-// Initialize
-fetchCurrentWeather();
-fetchForecast();
+fetchWeather();

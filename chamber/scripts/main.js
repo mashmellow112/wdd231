@@ -1,12 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Navigation Toggle Mechanism
   const menuButton = document.getElementById("menu-button");
-  const navMenu = document.getElementById("nav-menu");
-  const primaryNav = document.getElementById("primary-nav");
+  const navMenu = document.getElementById("primary-nav");
 
-  if (menuButton && (navMenu || primaryNav)) {
+  if (menuButton && navMenu) {
     menuButton.addEventListener("click", () => {
-      (navMenu || primaryNav).classList.toggle("active");
+      const isExpanded = menuButton.getAttribute("aria-expanded") === "true";
+      menuButton.setAttribute("aria-expanded", String(!isExpanded));
+      menuButton.setAttribute("aria-label", isExpanded ? "Open navigation menu" : "Close navigation menu");
+      navMenu.classList.toggle("active");
     });
   }
 });
