@@ -44,4 +44,24 @@
   .discover-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .directory-controls {
+    flex-wrap: nowrap;
+  }
+
+  .grid-layout {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .list-layout .business-card .card-header {
+    flex: 1 1 30%;
+  }
+
+  .list-layout .business-card .card-content {
+    flex: 1 1 70%;
+  }
+
+  .contact-info-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
