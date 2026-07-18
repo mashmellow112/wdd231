@@ -5,7 +5,7 @@
       "address": "123 Main St, Jinja",
       "phone": "+256 701 123456",
       "website": "https://www.jinjatech.ug",
-      "logo": "images/jinjatech-logo.png",
+      "logo": "images/jintech-logo.webp",
       "membershipLevel": "Gold"
     },
     {
@@ -13,7 +13,7 @@
       "address": "456 River Rd, Jinja",
       "phone": "+256 772 654321",
       "website": "https://www.nileadventures.ug",
-      "logo": "images/nileadventures-logo.png",
+      "logo": "images/nileadventures-logo.webp",
       "membershipLevel": "Silver"
     },
     {
@@ -21,7 +21,7 @@
       "address": "789 Central Ave, Jinja",
       "phone": "+256 755 987654",
       "website": "https://www.sourcecafe.ug",
-      "logo": "images/sourcecafe-logo.png",
+      "logo": "images/sourcecafe-logo.webp",
       "membershipLevel": "Silver"
     },
     {
@@ -29,7 +29,7 @@
       "address": "101 Market St, Jinja",
       "phone": "+256 788 112233",
       "website": "https://www.ugandacrafts.ug",
-      "logo": "images/ugandacrafts-logo.png",
+      "logo": "images/ugandacrafts-logo.webp",
       "membershipLevel": "Bronze"
     }
   ]

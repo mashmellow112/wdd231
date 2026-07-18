@@ -1,80 +1,197 @@
-document.addEventListener('DOMContentLoaded', () => {
-  // --- Select Elements ---
-  const directoryContainer = document.getElementById("directory-container");
-  const gridBtn = document.getElementById("grid-view-btn");
-  const listBtn = document.getElementById("list-view-btn");
+(() => {
+  'use strict';
 
-  // --- Render Cards ---
-  function displayMembers(data) {
-    directoryContainer.innerHTML = ""; // Clear loader text
+  // --- State ---
+  const state = {
+    members: [],
+    filtered: [],
+    layout: 'grid'
+  };
 
-    data.forEach(member => {
-      const card = document.createElement("article");
-      card.classList.add("business-card");
+  // --- DOM refs with guards ---
+  const container = document.getElementById('directory-container');
+  const gridBtn = document.getElementById('grid-view-btn');
+  const listBtn = document.getElementById('list-view-btn');
+  const searchInput = document.getElementById('member-search');
 
-      card.innerHTML = `
-        <div class="card-header">
-          <h3>${member.name}</h3>
-          <p class="card-tagline">${member.tagline || member.membershipLevel + ' Member'}</p>
-        </div>
-        <div class="card-content">
-          <img src="${member.logo}" alt="${member.name} Logo" class="card-logo" loading="lazy" onerror="this.style.display='none'">
-          <div class="card-details">
-            <p><strong>PHONE:</strong> ${member.phone}</p>
-            <p><strong>URL:</strong> <a href="${member.website}" target="_blank">${member.website.replace("https://", "")}</a></p>
-          </div>
-        </div>
-      `;
-      directoryContainer.appendChild(card);
+  // --- Utilities ---
+  const escapeHTML = (str) => {
+    if (!str) return '';
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  };
+
+  const getBadgeClass = (level) => {
+    const normalized = (level || '').toLowerCase();
+    if (normalized === 'gold') return 'membership-gold';
+    if (normalized === 'silver') return 'membership-silver';
+    return 'membership-bronze';
+  };
+
+  const getBadgeLabel = (level) => {
+    const normalized = (level || '').toLowerCase();
+    if (normalized === 'gold') return 'Gold Member';
+    if (normalized === 'silver') return 'Silver Member';
+    return 'Bronze Member';
+  };
+
+  const formatLastModified = () => {
+    if (!document.lastModified) return 'Unknown';
+    return new Date(document.lastModified).toLocaleString('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
     });
-  }
+  };
 
-  // --- Fetch Data ---
-  async function getMembers() {
+  // --- Data Layer ---
+  async function loadMembers() {
     try {
-      const response = await fetch('scripts/members.json');
-      if (response.ok) {
-        const data = await response.json();
-        displayMembers(data.members);
-      } else {
-        throw new Error('Failed to fetch member data.');
-      }
+      const response = await fetch('./members.json');
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const data = await response.json();
+      state.members = (data.members || []).map(normalizeMember);
+      applyFilter();
     } catch (error) {
-      console.error(error);
-      directoryContainer.innerHTML = `<p>Error loading directory. Please try again later.</p>`;
+      console.error('Directory load failed:', error);
+      if (container) {
+        container.innerHTML = `<p class="loading-text">Error loading directory. Please try again later.</p>`;
+      }
     }
   }
 
-  // --- Toggle Layout Views ---
-  gridBtn.addEventListener("click", () => {
-    directoryContainer.classList.add("grid-layout");
-    directoryContainer.classList.remove("list-layout");
-    gridBtn.classList.add("active-toggle");
-    listBtn.classList.remove("active-toggle");
-  });
+  function normalizeMember(member) {
+    return {
+      name: member.name || 'Unknown Business',
+      address: member.address || 'Address not provided',
+      phone: member.phone || 'Phone not provided',
+      website: member.website || '#',
+      logo: member.logo || '',
+      membershipLevel: member.membershipLevel || 'Bronze'
+    };
+  }
 
-  listBtn.addEventListener("click", () => {
-    directoryContainer.classList.add("list-layout");
-    directoryContainer.classList.remove("grid-layout");
-    listBtn.classList.add("active-toggle");
-    gridBtn.classList.remove("active-toggle");
-  });
+  // --- Rendering ---
+  function applyFilter() {
+    const query = (searchInput ? searchInput.value : '').toLowerCase().trim();
+    state.query = query;
+    if (!query) {
+      state.filtered = [...state.members];
+    } else {
+      state.filtered = state.members.filter((m) =>
+        m.name.toLowerCase().includes(query) ||
+        m.address.toLowerCase().includes(query) ||
+        m.membershipLevel.toLowerCase().includes(query)
+      );
+    }
+    render();
+  }
 
-  // --- Dark/Light Theme Engine ---
-  const savedTheme = localStorage.getItem("theme") || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-  document.documentElement.setAttribute("data-theme", savedTheme);
+  function render() {
+    if (!container) return;
+    container.innerHTML = '';
 
-  themeToggle.addEventListener("click", () => {
-    const currentTheme = document.documentElement.getAttribute("data-theme");
-    const targetTheme = currentTheme === "dark" ? "light" : "dark";
-    document.documentElement.setAttribute("data-theme", targetTheme);
-    localStorage.setItem("theme", targetTheme);
-  });
+    if (state.filtered.length === 0) {
+      container.innerHTML = `<p class="loading-text">No members found.</p>`;
+      return;
+    }
 
-  // --- Info Footer Setup ---
-  document.getElementById("current-year").textContent = new Date().getFullYear();
-  document.getElementById("last-modified").textContent = document.lastModified;
+    const fragment = document.createDocumentFragment();
 
-  // Init render
-  getMembers();
-});
+    state.filtered.forEach((member) => {
+      const card = document.createElement('article');
+      card.className = 'business-card';
+
+      const badgeClass = getBadgeClass(member.membershipLevel);
+      const badgeLabel = getBadgeLabel(member.membershipLevel);
+      const safeName = escapeHTML(member.name);
+      const safeAddress = escapeHTML(member.address);
+      const safePhone = escapeHTML(member.phone);
+      const safeWebsite = escapeHTML(member.website.replace(/^https?:\/\//, ''));
+      const websiteHref = escapeHTML(member.website);
+      const nameId = `member-name-${member.name.replace(/\s+/g, '-').toLowerCase()}`;
+
+      card.innerHTML = `
+        <div class="card-header">
+          <h3 id="${nameId}">${safeName}</h3>
+          <span class="membership-badge ${badgeClass}" aria-label="${badgeLabel}">${badgeLabel}</span>
+        </div>
+        <div class="card-content">
+          <img
+            src="${escapeHTML(member.logo)}"
+            alt="${safeName} logo"
+            class="card-logo"
+            loading="lazy"
+            onerror="this.src='images/placeholder.svg'; this.alt='Placeholder logo';"
+          >
+          <div class="card-details">
+            <p><strong>ADDRESS:</strong> ${safeAddress}</p>
+            <p><strong>PHONE:</strong> ${safePhone}</p>
+            <p>
+              <strong>URL:</strong>
+              <a href="${websiteHref}" target="_blank" rel="noopener noreferrer">
+                ${safeWebsite}
+                <span class="visually-hidden">(opens in new tab)</span>
+              </a>
+            </p>
+          </div>
+        </div>
+      `;
+
+      card.setAttribute('aria-labelledby', nameId);
+      fragment.appendChild(card);
+    });
+
+    container.appendChild(fragment);
+  }
+
+  // --- Events ---
+  function setLayout(layout) {
+    state.layout = layout;
+    if (layout === 'grid') {
+      container.classList.add('grid-layout');
+      container.classList.remove('list-layout');
+      gridBtn.classList.add('active-toggle');
+      gridBtn.setAttribute('aria-pressed', 'true');
+      listBtn.classList.remove('active-toggle');
+      listBtn.setAttribute('aria-pressed', 'false');
+    } else {
+      container.classList.add('list-layout');
+      container.classList.remove('grid-layout');
+      listBtn.classList.add('active-toggle');
+      listBtn.setAttribute('aria-pressed', 'true');
+      gridBtn.classList.remove('active-toggle');
+      gridBtn.setAttribute('aria-pressed', 'false');
+    }
+    render();
+  }
+
+  if (gridBtn) gridBtn.addEventListener('click', () => setLayout('grid'));
+  if (listBtn) listBtn.addEventListener('click', () => setLayout('list'));
+
+  let debounceTimer;
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => applyFilter(), 200);
+    });
+  }
+
+  // --- Footer metadata (guarded) ---
+  try {
+    const yearEl = document.getElementById('current-year');
+    const modEl = document.getElementById('last-modified');
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+    if (modEl) modEl.textContent = formatLastModified();
+  } catch (e) {
+    console.warn('Footer metadata injection failed:', e);
+  }
+
+  // --- Init: data fetch happens FIRST ---
+  loadMembers();
+})();

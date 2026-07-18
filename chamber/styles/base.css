@@ -461,6 +461,11 @@ main {
   color: #374151;
 }
 
+.membership-bronze {
+  background-color: #fde68a;
+  color: #78350f;
+}
+
 .spotlight-details {
   font-size: 0.9rem;
   color: var(--text-muted);
