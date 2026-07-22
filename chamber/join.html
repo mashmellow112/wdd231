@@ -119,8 +119,8 @@
       <form action="thankyou.html" method="get" class="join-form">
         <fieldset>
           <legend>Applicant Information</legend>
-          <label>First Name* <input type="text" name="fname" id="fname" autocomplete="given-name" required></label>
-          <label>Last Name* <input type="text" name="lname" id="lname" autocomplete="family-name" required></label>
+          <label>First Name* <input type="text" name="fname" id="fname" title="Your first name" autocomplete="given-name" required></label>
+          <label>Last Name* <input type="text" name="lname" id="lname" title="Your last name" autocomplete="family-name" required></label>
           <label>Email* <input type="email" name="email" id="email" title="A valid email address" placeholder="yourname@example.com" autocomplete="email" required></label>
           <label>Mobile Phone* <input type="tel" name="phone" id="phone" title="Your mobile phone number" autocomplete="tel" required></label>
         </fieldset>
@@ -143,10 +143,10 @@
 
         <fieldset>
           <legend>Business Description</legend>
-          <label>Organization Description <textarea name="description" id="description" rows="5" placeholder="Tell us about your business..."></textarea></label>
+          <label>Organization Description <textarea name="description" id="description" title="A brief description of your organization" rows="5" placeholder="Tell us about your business..."></textarea></label>
         </fieldset>
 
-        <input type="hidden" id="form_load_time" name="form_load_time" value="">
+        <input type="hidden" id="form_load_time" name="form_load_time" value="loading...">
         <button type="submit" class="cta-button">Join the Chamber</button>
       </form>
     </section>
