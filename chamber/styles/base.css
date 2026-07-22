@@ -640,6 +640,12 @@ footer {
   margin-bottom: 0.5rem;
 }
 
+.tier-price-note {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
 .tier-features {
   list-style: none;
   text-align: left;

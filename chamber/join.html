@@ -19,6 +19,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
   <script defer src="scripts/theme.js"></script>
   <script defer src="scripts/main.js"></script>
+  <script defer src="scripts/join.js"></script>
 </head>
 <body>
   <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -59,8 +60,8 @@
         <img src="images/plan2.webp" alt="Nansana community and business district" width="1200" height="600" loading="eager">
       </picture>
       <div class="join-hero-content">
-        <h2>Join Our Thriving Community</h2>
-        <p>Become a member to unlock benefits, network with local leaders, and grow your business in Nansana.</p>
+        <h1>Join Our Thriving Community</h1>
+        <p>Become a member to unlock benefits, network with local leaders, and grow your business in Nansana. Choose the tier that's right for you.</p>
       </div>
     </section>
 
@@ -78,8 +79,18 @@
           </ul>
         </article>
         <article class="tier-card">
+          <h3 class="tier-name">Bronze</h3>
+          <p class="tier-price">$99<span class="tier-price-note">/yr</span></p>
+          <ul class="tier-features">
+            <li>Basic directory listing</li>
+            <li>Event invitations</li>
+            <li>Newsletter access</li>
+            <li>Discounted event tickets</li>
+          </ul>
+        </article>
+        <article class="tier-card">
           <h3 class="tier-name">Silver</h3>
-          <p class="tier-price">$149<span style="font-size: 1rem; font-weight: 400; color: var(--text-muted);">/yr</span></p>
+          <p class="tier-price">$149<span class="tier-price-note">/yr</span></p>
           <ul class="tier-features">
             <li>Enhanced directory listing</li>
             <li>Priority event registration</li>
@@ -90,7 +101,7 @@
         </article>
         <article class="tier-card featured">
           <h3 class="tier-name">Gold</h3>
-          <p class="tier-price">$399<span style="font-size: 1rem; font-weight: 400; color: var(--text-muted);">/yr</span></p>
+          <p class="tier-price">$399<span class="tier-price-note">/yr</span></p>
           <ul class="tier-features">
             <li>Premium directory placement</li>
             <li>Homepage spotlight rotation</li>
@@ -108,22 +119,23 @@
       <form action="thankyou.html" method="get" class="join-form">
         <fieldset>
           <legend>Applicant Information</legend>
-          <label>First Name* <input type="text" name="fname" required></label>
-          <label>Last Name* <input type="text" name="lname" required></label>
-          <label>Email* <input type="email" name="email" placeholder="yourname@example.com" required></label>
-          <label>Mobile Phone* <input type="tel" name="phone" required></label>
+          <label>First Name* <input type="text" name="fname" id="fname" autocomplete="given-name" required></label>
+          <label>Last Name* <input type="text" name="lname" id="lname" autocomplete="family-name" required></label>
+          <label>Email* <input type="email" name="email" id="email" title="A valid email address" placeholder="yourname@example.com" autocomplete="email" required></label>
+          <label>Mobile Phone* <input type="tel" name="phone" id="phone" title="Your mobile phone number" autocomplete="tel" required></label>
         </fieldset>
 
         <fieldset>
           <legend>Business Information</legend>
-          <label>Business Name* <input type="text" name="bizname" required></label>
-          <label>Business Position <input type="text" name="position" pattern="[a-zA-Z\s-]{7,}" title="Position must be at least 7 characters long and contain only letters, spaces, or hyphens."></label>
+          <label>Business Name* <input type="text" name="bizname" id="bizname" title="Your organization's name" autocomplete="organization" required></label>
+          <label>Business Position <input type="text" name="position" id="position" pattern="[a-zA-Z\s-]{7,}" title="Position must be at least 7 characters long and contain only letters, spaces, or hyphens." autocomplete="organization-title"></label>
         </fieldset>
 
         <fieldset>
           <legend>Membership Level</legend>
           <div class="radio-group">
             <label><input type="radio" name="level" value="np" required> Non-Profit Membership</label>
+            <label><input type="radio" name="level" value="bronze"> Bronze Membership</label>
             <label><input type="radio" name="level" value="silver"> Silver Membership</label>
             <label><input type="radio" name="level" value="gold"> Gold Membership</label>
           </div>
@@ -131,10 +143,10 @@
 
         <fieldset>
           <legend>Business Description</legend>
-          <label><textarea name="description" rows="5" placeholder="Tell us about your business..."></textarea></label>
+          <label>Organization Description <textarea name="description" id="description" rows="5" placeholder="Tell us about your business..."></textarea></label>
         </fieldset>
 
-        <input type="hidden" name="form_load_time" value="">
+        <input type="hidden" id="form_load_time" name="form_load_time" value="">
         <button type="submit" class="cta-button">Join the Chamber</button>
       </form>
     </section>
@@ -167,8 +179,5 @@
       <p>Last Modified: <span id="last-modified"></span></p>
     </div>
   </footer>
-  <script>
-    document.querySelector('input[name="form_load_time"]').value = Date.now();
-  </script>
 </body>
 </html>
