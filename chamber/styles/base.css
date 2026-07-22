@@ -68,7 +68,7 @@ a:hover, a:focus {
   position: absolute;
   top: -40px;
   left: 0;
-  background: var(--primary);
+  background-color: var(--primary);
   color: #ffffff;
   padding: 0.5rem 1rem;
   z-index: 10000;
@@ -253,13 +253,14 @@ main {
   position: relative;
   z-index: 2;
   background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.4) 60%, transparent 100%);
-  padding: 3rem 2rem 2rem;
+  padding: 2rem;
   width: 100%;
   color: #ffffff;
 }
 
 .page-hero-content h1, .page-hero-content h2 {
   font-family: var(--font-headings);
+  color: #ffffff;
   font-size: 1.75rem;
   margin-bottom: 0.5rem;
   text-shadow: 0 2px 4px rgba(0,0,0,0.5);
@@ -455,18 +456,18 @@ main {
 }
 
 .membership-gold {
-  background-color: #fef3c7;
-  color: #92400e;
+  background-color: var(--secondary-light);
+  color: var(--card-bg);
 }
 
 .membership-silver {
-  background-color: #e5e7eb;
-  color: #374151;
+  background-color: var(--text-muted);
+  color: var(--card-bg);
 }
 
 .membership-bronze {
-  background-color: #fde68a;
-  color: #78350f;
+  background-color: var(--secondary);
+  color: var(--card-bg);
 }
 
 .spotlight-details {
@@ -847,7 +848,7 @@ footer {
 }
 
 .view-toggle .active-toggle {
-  background-color: var(--primary);
+  background-color: var(--primary-light);
   color: #ffffff;
   border-color: var(--primary);
 }
@@ -1147,7 +1148,7 @@ footer {
   }
 
   nav a {
-    padding: 0.5rem 0;
+    padding: 0.5rem;
   }
 
   .page-hero-content h1, .page-hero-content h2 {
