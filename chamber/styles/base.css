@@ -68,7 +68,7 @@ a:hover, a:focus {
   position: absolute;
   top: -40px;
   left: 0;
-  background-color: var(--primary);
+l  background-color: var(--primary);
   color: #ffffff;
   padding: 0.5rem 1rem;
   z-index: 10000;

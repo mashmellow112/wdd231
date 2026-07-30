@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jinja Chamber of Commerce - Site Plan</title>
+
+  <!-- Google Fonts: Open Sans and Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       COLOR SCHEME VARIABLES
+       Applied exclusively across this site plan document
+       ========================================================================== */
+    :root {
+      --primary-color: #004d5a;    /* Deep Teal: Headings, Headers */
+      --secondary-color: #b45309;  /* Burnt Orange: Subheadings, Links, Accent Borders */
+      --accent-color: #f4f6f8;     /* Light Gray: Card Backgrounds, Wireframe Frames */
+      --text-color: #1a2e3b;       /* Dark Charcoal: Paragraph Body Text */
+      --background-color: #F7FAFC; /* Off-White: Page Background */
+    }
+
+    /* ==========================================================================
+       TYPOGRAPHY & GLOBAL STYLES
+       ========================================================================== */
+    body {
+      font-family: 'Open Sans', sans-serif;
+      color: var(--text-color);
+      background-color: var(--background-color);
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: var(--primary-color);
+      color: #ffffff;
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+
+    header h1 {
+      font-family: 'Montserrat', sans-serif;
+      margin: 0 0 0.5rem 0;
+      font-size: 2.2rem;
+    }
+
+    header p {
+      margin: 0;
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+    }
+
+    section {
+      background-color: #ffffff;
+      border-radius: 8px;
+      padding: 1.5rem 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      border-left: 5px solid var(--secondary-color);
+    }
+
+    h2 {
+      font-family: 'Montserrat', sans-serif;
+      color: var(--primary-color);
+      margin-top: 0;
+      border-bottom: 2px solid var(--accent-color);
+      padding-bottom: 0.5rem;
+    }
+
+    h3 {
+      font-family: 'Montserrat', sans-serif;
+      color: var(--secondary-color);
+      margin-bottom: 0.5rem;
+    }
+
+    ul {
+      padding-left: 1.2rem;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+
+    /* ==========================================================================
+       COLOR PALETTE SWATCHES
+       ========================================================================== */
+    .color-palette {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+
+    .color-box {
+      flex: 1;
+      min-width: 140px;
+      padding: 1rem;
+      border-radius: 6px;
+      text-align: center;
+      color: #ffffff;
+      font-weight: 600;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .bg-primary { background-color: #004d5a; }
+    .bg-secondary { background-color: #b45309; }
+    .bg-accent { background-color: #f4f6f8; color: #1a2e3b; }
+
+    /* ==========================================================================
+       TYPOGRAPHY SAMPLES
+       ========================================================================== */
+    .font-sample-heading {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+
+    .font-sample-body {
+      font-family: 'Open Sans', sans-serif;
+      font-size: 1rem;
+    }
+
+    /* ==========================================================================
+       WIREFRAME CONTAINER & RESPONSIVE LAYOUT
+       ========================================================================== */
+    .wireframe-container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+
+    @media (min-width: 768px) {
+      .wireframe-container {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .wireframe-box {
+      border: 2px dashed var(--secondary-color);
+      background-color: var(--accent-color);
+      padding: 1rem;
+      text-align: center;
+      border-radius: 6px;
+    }
+
+    .wireframe-box img {
+      max-width: 100%;
+      height: auto;
+      border: 1px solid #cbd5e0;
+      background-color: #ffffff;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      color: #718096;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Site Plan: Jinja Chamber of Commerce</h1>
+    <p>A hub for local business, community, and discovery in Jinja.</p>
+  </header>
+
+  <main>
+
+    <!-- SECTION 1: SITE NAME -->
+    <section>
+      <h2>Site Name</h2>
+      <p><strong>Proposed Name:</strong> Jinja Chamber of Commerce</p>
+      <p><strong>Reason for Name:</strong> The name is direct, professional, and clearly communicates the site's purpose as the official online presence for the Jinja business community.</p>
+      <p><strong>Optional Domain Availability:</strong> <code>jinjachamber.org</code></p>
+    </section>
+
+    <!-- SECTION 2: SITE PURPOSE -->
+    <section>
+      <h2>Site Purpose</h2>
+      <p>The purpose of the Jinja Chamber of Commerce website is to foster local economic growth by connecting businesses with the community. It serves as a comprehensive directory of member businesses, a source for local events, and a platform for showcasing premier "spotlight" members. The site aims to be an essential resource for both residents and visitors looking to engage with and support Jinja's vibrant business landscape.</p>
+    </section>
+
+    <!-- SECTION 3: SCENARIOS -->
+    <section>
+      <h2>Target Audience Scenarios</h2>
+      <ul>
+        <li><strong>Scenario 1:</strong> "I'm a tourist visiting Jinja and looking for adventure tour companies. How can I find a list of reputable, local options?"</li>
+        <li><strong>Scenario 2:</strong> "As a local business owner, I want to see which companies are Gold members to explore potential B2B partnerships."</li>
+      </ul>
+    </section>
+
+    <!-- SECTION 4: COLOR SCHEME -->
+    <section>
+      <h2>Color Scheme</h2>
+      <p>The color palette is derived from the project's CSS (`base.css`) to ensure design consistency. It uses professional and inviting tones.</p>
+      
+      <div class="color-palette">
+        <div class="color-box bg-primary">Primary<br>#004d5a</div>
+        <div class="color-box bg-secondary">Secondary<br>#b45309</div>
+        <div class="color-box bg-accent">Accent<br>#f4f6f8</div>
+      </div>
+
+      <ul style="margin-top: 1.5rem;">
+        <li><strong>Primary Color (<code>#004d5a</code>):</strong> Used for main headings, navigation elements, and key interface components.</li>
+        <li><strong>Secondary Color (<code>#b45309</code>):</strong> Used for calls-to-action, buttons, and important accents like featured borders.</li>
+        <li><strong>Accent Color (<code>#f4f6f8</code>):</strong> Used for the main page background to provide a clean, bright canvas for content.</li>
+      </ul>
+    </section>
+
+    <!-- SECTION 5: TYPOGRAPHY -->
+    <section>
+      <h2>Typography</h2>
+      <p>The font choices are based on the project's CSS (`base.css`) for readability and a modern aesthetic.</p>
+      
+      <h3>Heading Font</h3>
+      <p class="font-sample-heading">Montserrat (700 Bold)</p>
+      <p>Used for all page headers (<code>&lt;h1&gt;</code>, <code>&lt;h2&gt;</code>, <code>&lt;h3&gt;</code>) to establish a strong visual hierarchy.</p>
+
+      <h3>Body Font</h3>
+      <p class="font-sample-body">Open Sans (400 Regular)</p>
+      <p>Used for all body copy, lists, and detailed text to ensure high legibility across all devices.</p>
+    </section>
+
+    <!-- SECTION 6: WIREFRAME -->
+    <section>
+      <h2>Wireframes</h2>
+      <p>Below are structural sketches for the home page layouts across mobile and desktop viewports. Please replace the placeholder images with your own drawings.</p>
+      
+      <div class="wireframe-container">
+        <!-- Small Viewport Wireframe -->
+        <div class="wireframe-box">
+          <h3>Small Viewport (Mobile)</h3>
+          <img src="images/small viewport(mobile).png" alt="Mobile wireframe sketch showing single column layout with stacked navigation, hero image, and content cards.">
+        </div>
+
+        <!-- Large Viewport Wireframe -->
+        <div class="wireframe-box">
+          <h3>Large Viewport (Desktop/Tablet)</h3>
+          <img src="images/large viewport(tabletdesktop).png" alt="Desktop wireframe sketch showing horizontal navigation, two-column content area, sidebar, and footer.">
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Jinja Chamber of Commerce Site Plan | WDD 231</p>
+  </footer>
+
+</body>
+</html>
