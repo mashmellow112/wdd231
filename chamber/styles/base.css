@@ -396,6 +396,16 @@ main {
   height: 48px;
 }
 
+.weather-icon-large {
+  font-size: 64px;
+  line-height: 1;
+}
+
+.day-icon {
+  font-size: 2rem;
+  line-height: 1;
+}
+
 /* Spotlights */
 .spotlight-grid {
   display: grid;
