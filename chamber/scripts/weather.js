@@ -57,8 +57,6 @@ function displayCurrentWeather(current) {
   descEl.textContent = info.desc;
   iconEl.setAttribute('alt', info.desc);
   iconEl.textContent = info.icon;
-  iconEl.style.fontSize = '64px';
-  iconEl.style.lineHeight = '1';
 }
 
 function displayForecast(daily) {
@@ -78,7 +76,7 @@ function displayForecast(daily) {
     dayEl.className = 'forecast-day';
     dayEl.innerHTML = `
       <span class="day-label">${dayName}</span>
-      <span class="day-icon" aria-hidden="true" style="font-size: 2rem; line-height: 1;">${info.icon}</span>
+      <span class="day-icon" aria-hidden="true">${info.icon}</span>
       <span class="day-temp">${maxTemp}° / ${minTemp}°</span>
     `;
     container.appendChild(dayEl);
