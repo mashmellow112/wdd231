@@ -13,8 +13,4 @@ document.addEventListener("DOMContentLoaded", () => {
       localStorage.setItem("theme", targetTheme);
     });
   }
-
-  // --- Info Footer Setup ---
-  document.getElementById("current-year").textContent = new Date().getFullYear();
-  document.getElementById("last-modified").textContent = document.lastModified;
 });

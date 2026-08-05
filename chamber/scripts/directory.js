@@ -102,10 +102,4 @@ document.addEventListener('DOMContentLoaded', () => {
       renderMembers(filtered);
     });
   }
-
-  // Footer timestamps
-  const yearEl = document.getElementById("current-year");
-  const modEl = document.getElementById("last-modified");
-  if (yearEl) yearEl.textContent = new Date().getFullYear();
-  if (modEl) modEl.textContent = document.lastModified;
 });

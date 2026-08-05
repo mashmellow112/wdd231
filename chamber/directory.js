@@ -90,8 +90,5 @@ document.addEventListener('DOMContentLoaded', () => {
     renderMembers(filtered);
   });
 
-  document.getElementById("current-year").textContent = new Date().getFullYear();
-  document.getElementById("last-modified").textContent = document.lastModified;
-
   getMembers();
 });
